@@ -1,10 +1,43 @@
 package com.employee.model;
 
+
+import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
+
+@Entity
+@Table(name = "employee")
 public class Employee {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @NotBlank
+    @Column(unique = true)
+    @Size(min = 1, max = 100)
     private String name;
+
+    @NotBlank
+    @Column(unique = true)
+    @Size(min = 5, max = 5)
     private int employeeId;
+
+
+    @NotBlank
+    @Size(min = 2, max = 30)
     private String role;
+
+    @NotBlank
+    @Size(min =1, max = 5)
+    private String gender;
+
+    @NotBlank
+    @Size(min = 2, max = 100)
     private String homeOffice;
+
+    @NotBlank
+    @Size(min = 2, max = 100)
     private String currentProject;
 
     public String getRole() {
@@ -45,5 +78,21 @@ public class Employee {
 
     public void setEmployeeId(int employeeId) {
         this.employeeId = employeeId;
+    }
+
+    public String getGender() {
+        return gender;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender;
+    }
+
+    public String getId() {
+        return String.valueOf(id);
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 }
