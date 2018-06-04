@@ -1,8 +1,6 @@
 package com.employee.service;
 
-import com.employee.model.Avatar;
-import com.employee.model.Employee;
-import com.employee.model.Technical;
+import com.employee.model.*;
 import org.springframework.web.bind.annotation.*;
 
 import java.sql.*;
@@ -87,11 +85,78 @@ public class EmployeeController {
     }
 
     @CrossOrigin
-    @RequestMapping("/employees/employeeId")
-    public void saveTechnicalAbilities(
+    @RequestMapping("/employee/domain")
+    public void saveDomainSkill(
+            @RequestBody Domain domain
+    ) {
+        try {
+            Connection connection = getConnection();
+            PreparedStatement statement =
+                    connection.prepareStatement("insert into domain_skills (employeeId, government, education) values (?, ?, ?)");
+            statement.setInt(1, domain.getEmployeeId());
+            statement.setInt(2, domain.getGovernment());
+            statement.setInt(3, domain.getEducation());
+            statement.execute();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    @CrossOrigin
+    @RequestMapping("/employee/consulting")
+    public void saveConsultingSkill(
+            @RequestBody Consulting consulting
+    ) {
+        try {
+            Connection connection = getConnection();
+            PreparedStatement statement =
+                    connection.prepareStatement("insert into consulting_skills (employeeId, communication, planning, questioning) values (?, ?, ?, ?)");
+            statement.setInt(1, consulting.getEmployeeId());
+            statement.setInt(2, consulting.getCommunication());
+            statement.setInt(3, consulting.getPlanning());
+            statement.setInt(4, consulting.getQuestioning());
+            statement.execute();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    @CrossOrigin
+    @RequestMapping("/employee/technical")
+    public void saveTechnicalSkill(
             @RequestBody Technical technical
     ) {
-        System.out.println(technical);
+        try {
+            Connection connection = getConnection();
+            PreparedStatement statement =
+                    connection.prepareStatement("insert into technical_skills (employeeId, java, AWS) values (?, ?, ?)");
+            statement.setInt(1, technical.getEmployeeId());
+            statement.setInt(2, technical.getJava());
+            statement.setInt(3, technical.getAws());
+            statement.execute();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    @CrossOrigin
+    @RequestMapping("/employee/testing")
+    public void saveTestingSkill(
+            @RequestBody Testing testing
+    ) {
+        try {
+            Connection connection = getConnection();
+            PreparedStatement statement =
+                    connection.prepareStatement("insert into testing_skills (employeeId, capybara, cucumber, fitnesse) values (?, ?, ?, ?)");
+            statement.setInt(1, testing.getEmployeeId());
+            statement.setInt(2, testing.getCapybara());
+            statement.setInt(3, testing.getCucumber());
+            statement.setInt(4, testing.getFitnesse());
+            statement.execute();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     private Connection getConnection() throws ClassNotFoundException, SQLException {
