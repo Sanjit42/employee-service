@@ -1,8 +1,20 @@
 package com.employee.model;
 
-public class Employee {
+
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "employee")
+public class Employee{
+
+
     private String name;
+
+    @Id
     private int employeeId;
+
     private String role;
     private String homeOffice;
     private String currentProject;
