@@ -21,15 +21,7 @@ public class EmployeeController {
     @GetMapping("/employees")
     public List<Employee> getEmployees() {
         try {
-            Configuration config = new Configuration()
-                    .configure()
-                    .addAnnotatedClass(Employee.class)
-                    .addAnnotatedClass(SkillsAndAbilities.class);
-            ServiceRegistry registry = new ServiceRegistryBuilder()
-                    .applySettings(config.getProperties())
-                    .buildServiceRegistry();
-            SessionFactory sf = config.buildSessionFactory(registry);
-            Session session = sf.openSession();
+            Session session = getSession();
 
             Transaction tx = session.beginTransaction();
             employees = session.createCriteria(Employee.class).list();
@@ -48,15 +40,7 @@ public class EmployeeController {
             @RequestBody Employee employee
     ) {
         try {
-            Configuration config = new Configuration()
-                    .configure()
-                    .addAnnotatedClass(Employee.class);
-
-            ServiceRegistry registry = new ServiceRegistryBuilder()
-                    .applySettings(config.getProperties())
-                    .buildServiceRegistry();
-            SessionFactory sf = config.buildSessionFactory(registry);
-            Session session = sf.openSession();
+            Session session = getSession();
 
             Transaction tx = session.beginTransaction();
             session.save(employee);
@@ -73,15 +57,7 @@ public class EmployeeController {
             @RequestBody SkillsAndAbilities skillsAndAbilities
     ) {
         try {
-            Configuration config = new Configuration()
-                    .configure()
-                    .addAnnotatedClass(SkillsAndAbilities.class);
-
-            ServiceRegistry registry = new ServiceRegistryBuilder()
-                    .applySettings(config.getProperties())
-                    .buildServiceRegistry();
-            SessionFactory sf = config.buildSessionFactory(registry);
-            Session session = sf.openSession();
+            Session session = getSession();
 
             Transaction tx = session.beginTransaction();
             session.save(skillsAndAbilities);
@@ -96,15 +72,7 @@ public class EmployeeController {
     @GetMapping("/employees/skillsAndAbilities")
     public List<SkillsAndAbilities> getSkillsAndAbilities() {
         try {
-            Configuration config = new Configuration()
-                    .configure()
-                    .addAnnotatedClass(SkillsAndAbilities.class);
-
-            ServiceRegistry registry = new ServiceRegistryBuilder()
-                    .applySettings(config.getProperties())
-                    .buildServiceRegistry();
-            SessionFactory sf = config.buildSessionFactory(registry);
-            Session session = sf.openSession();
+            Session session = getSession();
 
             Transaction tx = session.beginTransaction();
 
@@ -116,5 +84,17 @@ public class EmployeeController {
             e.printStackTrace();
         }
         return skillsAndAbilities;
+    }
+
+    private Session getSession() {
+        Configuration config = new Configuration()
+                .configure()
+                .addAnnotatedClass(SkillsAndAbilities.class);
+
+        ServiceRegistry registry = new ServiceRegistryBuilder()
+                .applySettings(config.getProperties())
+                .buildServiceRegistry();
+        SessionFactory sf = config.buildSessionFactory(registry);
+        return sf.openSession();
     }
 }
