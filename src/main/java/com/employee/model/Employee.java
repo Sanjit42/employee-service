@@ -18,6 +18,9 @@ public class Employee{
     private String currentProject;
     private String gender;
 
+    private ProjectExperience projectExperience;
+    private LeaveHistory leaveHistory;
+
     public String getRole() {
         return role;
     }
@@ -72,5 +75,21 @@ public class Employee{
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public ProjectExperience getProjectExperience() {
+        return projectExperience;
+    }
+
+    public void setProjectExperience(ProjectExperience projectExperience) {
+        this.projectExperience = projectExperience;
+    }
+
+    public LeaveHistory getLeaveHistory() {
+        return leaveHistory;
+    }
+
+    public void setLeaveHistory(LeaveHistory leaveHistory) {
+        this.leaveHistory = leaveHistory;
     }
 }
