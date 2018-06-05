@@ -1,23 +1,22 @@
 package com.employee.model;
 
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "employee")
 public class Employee{
 
+    @Id
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
+    private int id;
 
     private String name;
-
-    @Id
     private int employeeId;
-
     private String role;
     private String homeOffice;
     private String currentProject;
+    private String gender;
 
     public String getRole() {
         return role;
@@ -57,5 +56,21 @@ public class Employee{
 
     public void setEmployeeId(int employeeId) {
         this.employeeId = employeeId;
+    }
+
+    public String getGender() {
+        return gender;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 }
